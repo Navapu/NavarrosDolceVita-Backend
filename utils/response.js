@@ -18,6 +18,6 @@ export const ResponseAPI = ({ msg = "", data = [], error = false }) => {
     return {
         msg,
         data,
-        status: error ? "ok" : "error"
+        status: error ? "error" : "ok"
     };
 };

@@ -12,14 +12,16 @@ export const loginUser = async (req, res, next) => {
         const user = await User.findOne({ email });
         if (!user) {
             return res.status(401).json(ResponseAPI({
-                msg: 'Invalid email or password'
+                msg: 'Invalid email or password',
+                error: true
             }));
         }
         const isMatch = await bcrypt.compare(password, user.password);
 
         if (!isMatch) {
             return res.status(401).json(ResponseAPI({
-                msg: 'Invalid email or password'
+                msg: 'Invalid email or password',
+                error: true
             }));
         }
 
@@ -42,7 +44,7 @@ export const loginUser = async (req, res, next) => {
                 role: user.role,
                 token
             },
-            error: "ok"
+            error: false
         }));
     } catch (error) {
         next(error);
@@ -54,7 +56,8 @@ export const registerUser = async (req, res, next) => {
         const existingUser = await User.findOne({ email });
         if (existingUser) {
             return res.status(400).json(ResponseAPI({
-                msg: 'This email is already in use'
+                msg: 'This email is already in use',
+                error: true
             }));
         }
         const salt = await bcrypt.genSalt(10);
@@ -84,7 +87,7 @@ export const registerUser = async (req, res, next) => {
                 role: newUser.role,
                 token
             },
-            error: "ok"
+            error: false
         }));
 
     } catch (error) {
