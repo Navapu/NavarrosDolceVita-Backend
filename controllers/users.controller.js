@@ -2,13 +2,8 @@ import { User } from "../db/models/index.js";
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { JWT_SECRET } from '../config/config.js';
+import { ResponseAPI } from "../utils/response.js"
 
-
-const ResponseAPI = {
-    msg: "",
-    data: [],
-    status: 'ok'
-}
 
 export const loginUser = async (req, res, next) => {
     try {
@@ -16,18 +11,16 @@ export const loginUser = async (req, res, next) => {
 
         const user = await User.findOne({ email });
         if (!user) {
-            ResponseAPI.msg = 'Invalid email or password';
-            ResponseAPI.data = []
-            ResponseAPI.status = 'error';
-            return res.status(401).json(ResponseAPI);
+            return res.status(401).json(ResponseAPI({
+                msg: 'Invalid email or password'
+            }));
         }
         const isMatch = await bcrypt.compare(password, user.password);
 
         if (!isMatch) {
-            ResponseAPI.msg = 'Invalid email or password';
-            ResponseAPI.data = []
-            ResponseAPI.status = 'error';
-            return res.status(401).json(ResponseAPI);
+            return res.status(401).json(ResponseAPI({
+                msg: 'Invalid email or password'
+            }));
         }
 
         const token = jwt.sign({
@@ -40,15 +33,17 @@ export const loginUser = async (req, res, next) => {
             }
         );
 
-        ResponseAPI.msg = 'Correct login';
-        ResponseAPI.data = {
-            id: user._id,
-            email: user.email,
-            name: user.name,
-            token
-        };
-        ResponseAPI.status = 'ok';
-        return res.status(200).json(ResponseAPI);
+        return res.status(200).json(ResponseAPI({
+            msg: 'Correct login',
+            data: {
+                id: user._id,
+                email: user.email,
+                name: user.name,
+                role: user.role,
+                token
+            },
+            error: "ok"
+        }));
     } catch (error) {
         next(error);
     }
@@ -58,10 +53,9 @@ export const registerUser = async (req, res, next) => {
         const { email, password, name, role } = req.body;
         const existingUser = await User.findOne({ email });
         if (existingUser) {
-            ResponseAPI.msg = 'This email is already in use';
-            ResponseAPI.data = [];
-            ResponseAPI.status = 'error';
-            return res.status(400).json(ResponseAPI);
+            return res.status(400).json(ResponseAPI({
+                msg: 'This email is already in use'
+            }));
         }
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt)
@@ -81,17 +75,17 @@ export const registerUser = async (req, res, next) => {
                 expiresIn: '2h'
             }
         );
-
-        ResponseAPI.msg = 'User registered';
-        ResponseAPI.data = {
-            id: newUser._id,
-            email: newUser.email,
-            name: newUser.name,
-            role: newUser.role,
-            token
-        };
-        ResponseAPI.status = "ok"
-        return res.status(200).json(ResponseAPI);
+        return res.status(200).json(ResponseAPI({
+            msg: 'User registered',
+            data: {
+                id: newUser._id,
+                email: newUser.email,
+                name: newUser.name,
+                role: newUser.role,
+                token
+            },
+            error: "ok"
+        }));
 
     } catch (error) {
         next(error);
