@@ -23,7 +23,7 @@ const productSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    enum: ["Pizza", "Pasta", "Bebida", "Postre"], // añade más si quieres
+    enum: ["Pizza", "Pasta", "Bebida", "Postre"],
     required: true
   },
   imageUrl: String,

@@ -79,7 +79,7 @@ export const registerUser = async (req, res, next) => {
             }
         );
         return res.status(200).json(ResponseAPI({
-            msg: 'User registered',
+            msg: 'Registered User',
             data: {
                 id: newUser._id,
                 email: newUser.email,
@@ -107,7 +107,8 @@ export const getCurrentUser = async (req, res, next) => {
         }
         return res.status(200).json(ResponseAPI({
             msg: "User found",
-            data: currentUser
+            data: currentUser,
+            error: false
         }));
 
     } catch (error) {

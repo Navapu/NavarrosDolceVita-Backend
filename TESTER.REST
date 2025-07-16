@@ -24,3 +24,23 @@ Content-Type: application/json
 ###
 GET  {{domain}}/user/me
 Authorization: Bearer {{token}}
+
+###
+POST {{domain}}/products
+Content-Type: application/json
+
+{
+    "name": "Pizza margarita",
+    "description": "Pizza tradicional con salsa de tomate, mozzarella y albahaca",
+    "price": 8,
+    "category": "Pizza",
+    "imageUrl": "https://www.grupoestrellapolar.com/files/products/pizza_margarita1.png",
+    "available": "true"
+}
+###
+PUT {{domain}}/products/687781b7586c7edcea7f69fb
+Content-Type: application/json
+
+{
+    "price": 9
+}

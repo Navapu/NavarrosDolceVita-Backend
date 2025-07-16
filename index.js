@@ -3,6 +3,7 @@ import { connectDB } from './db/mongoose.js';
 import { PORT, BACKEND_URL } from './config/config.js';
 import { errorMiddleware, notFoundHandler } from './middleware/error.middleware.js';
 import userRouter from './routes/users.routes.js';
+import productRouter from './routes/products.routes.js';
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.get("/", (req, res) => {
 
 
 app.use('/user', userRouter);
+app.use('/products', productRouter);
 
 app.use(notFoundHandler);
 app.use(errorMiddleware);
