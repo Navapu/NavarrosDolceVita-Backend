@@ -94,3 +94,23 @@ export const registerUser = async (req, res, next) => {
         next(error);
     }
 }
+export const getCurrentUser = async (req, res, next) => {
+    try {
+        const userId = req.userId;
+        const currentUser = await User.findById(userId).select('-password');
+
+        if(!currentUser){
+            return res.status(401).json(ResponseAPI({
+                msg: "User not found",
+                error: true
+            }));
+        }
+        return res.status(200).json(ResponseAPI({
+            msg: "User found",
+            data: currentUser
+        }));
+
+    } catch (error) {
+        next(error);
+    }
+}
