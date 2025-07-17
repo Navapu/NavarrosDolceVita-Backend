@@ -80,3 +80,24 @@ export const editProduct = async (req, res, next) => {
         next(error)
     }
 }
+
+export const delProduct = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const product = await Product.findByIdAndDelete(id);
+
+        if (!product) {
+            return res.status(404).json(ResponseAPI({
+                msg: "Product not found",
+                error: true
+            }));
+        }
+        return res.status(200).json(ResponseAPI({
+            msg: "Removed product",
+            data: product,
+            error: false
+        }));
+    } catch (error) {
+        next(error)
+    }
+}

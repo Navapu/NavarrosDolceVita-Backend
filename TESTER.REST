@@ -44,3 +44,7 @@ Content-Type: application/json
 {
     "price": 9
 }
+
+###
+DELETE {{domain}}/products/687781b7586c7edcea7f69fb
+Content-Type: application/json
