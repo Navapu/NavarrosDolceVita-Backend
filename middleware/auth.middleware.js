@@ -3,11 +3,11 @@
  * Middleware de autenticación
  * 
  * Verifica el token JWT enviado en el encabezado 'Authorization'.
- * Si el token es válido, añade el userId al objeto `req` y permite continuar.
+ * Si el token es válido, añade `userId` y `userRole` al objeto `req` y permite continuar.
  * Si el token falta o es inválido, responde con estado 401.
  * 
  * Verifies the JWT token from the 'Authorization' header.
- * If the token is valid, adds `userId` to `req` and continues.
+ * If the token is valid, adds `userId` and `userRole` to `req` and continues.
  * If missing or invalid, responds with 401 Unauthorized.
  */
 
@@ -26,6 +26,7 @@ export const authMiddleware = (req, res, next) => {
         const decoded = jwt.verify(token, JWT_SECRET);
         console.log(decoded)
         req.userId = decoded.userId;
+        req.userRole = decoded.role;
         next();
 
     } catch (error) {

@@ -1,5 +1,5 @@
 @domain = http://localhost:3001
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODc1ODEzZDk1YTcwODBjM2M0NWRjZGYiLCJuYW1lIjoiQWxlamFuZHJvIiwiaWF0IjoxNzUyNjU4OTMzLCJleHAiOjE3NTI2NjYxMzN9.SWGNAHP2V6Mux7mcoSCngZAf2rnNHFWzkP33MM0C7Pg
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODc5MzQxMzM1YTA0NjIxOWRjNTE5MDgiLCJuYW1lIjoiRGFuaWVsIiwicm9sZSI6ImN1c3RvbWVyIiwiaWF0IjoxNzUyNzczNjUyLCJleHAiOjE3NTI3ODA4NTJ9.2kibsY8Xa0u6VBoAf5FpVMdYDghFeVl2klp7avR5uEk
 
 
 ###
@@ -7,10 +7,10 @@ POST {{domain}}/user/register
 Content-Type: application/json
 
 {
-    "name": "Alejandro",
-    "email": "alejandro@gmail.com",
+    "name": "Daniel",
+    "email": "daniel@gmail.com",
     "password": "123456",
-    "role": "admin"
+    "role": "customer"
 }
 
 ###
@@ -28,6 +28,7 @@ Authorization: Bearer {{token}}
 ###
 POST {{domain}}/products
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
     "name": "Pizza margarita",
@@ -38,8 +39,9 @@ Content-Type: application/json
     "available": "true"
 }
 ###
-PUT {{domain}}/products/687781b7586c7edcea7f69fb
+PUT {{domain}}/products/687933da35a046219dc51903
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
     "price": 9
@@ -48,3 +50,4 @@ Content-Type: application/json
 ###
 DELETE {{domain}}/products/687781b7586c7edcea7f69fb
 Content-Type: application/json
+Authorization: Bearer {{token}}

@@ -16,6 +16,13 @@ export const getProducts = async (req, res, next) => {
 
 export const addProduct = async (req, res, next) => {
     try {
+        const userRole = req.userRole;
+        if (userRole !== "admin") {
+            return res.status(403).json(ResponseAPI({
+                msg: "Forbidden: admin access required",
+                error: true
+            }));
+        }
         const { name, description, price, category, imageUrl, available } = req.body;
 
         const existingProduct = await Product.findOne({ name });
@@ -47,7 +54,15 @@ export const addProduct = async (req, res, next) => {
 export const editProduct = async (req, res, next) => {
     try {
         const { id } = req.params;
+        const userRole = req.userRole;
         const { name, description, price, category, imageUrl, available } = req.body;
+
+        if (userRole !== "admin") {
+            return res.status(403).json(ResponseAPI({
+                msg: "Forbidden: admin access required",
+                error: true
+            }));
+        }
         const product = await Product.findByIdAndUpdate(
             id,
             {
@@ -84,7 +99,15 @@ export const editProduct = async (req, res, next) => {
 export const delProduct = async (req, res, next) => {
     try {
         const { id } = req.params;
+        const userRole = req.userRole;
         const product = await Product.findByIdAndDelete(id);
+        console.log(userRole);
+        if (userRole !== "admin") {
+            return res.status(403).json(ResponseAPI({
+                msg: "Forbidden: admin access required",
+                error: true
+            }));
+        }
 
         if (!product) {
             return res.status(404).json(ResponseAPI({
