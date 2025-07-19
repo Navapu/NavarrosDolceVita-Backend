@@ -1,5 +1,5 @@
 @domain = http://localhost:3001
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODc5MzQxMzM1YTA0NjIxOWRjNTE5MDgiLCJuYW1lIjoiRGFuaWVsIiwicm9sZSI6ImN1c3RvbWVyIiwiaWF0IjoxNzUyNzczNjUyLCJleHAiOjE3NTI3ODA4NTJ9.2kibsY8Xa0u6VBoAf5FpVMdYDghFeVl2klp7avR5uEk
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODc1ODEzZDk1YTcwODBjM2M0NWRjZGYiLCJuYW1lIjoiQWxlamFuZHJvIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzUyOTE5OTUzLCJleHAiOjE3NTI5MjcxNTN9.t7OKe2msq9PTmXGYFW9442Ab7j5rR6JvHPWn-49Bry4
 
 
 ###
@@ -31,11 +31,11 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "name": "Pizza margarita",
-    "description": "Pizza tradicional con salsa de tomate, mozzarella y albahaca",
-    "price": 8,
-    "category": "Pizza",
-    "imageUrl": "https://www.grupoestrellapolar.com/files/products/pizza_margarita1.png",
+    "name": "Raviolis carbonara",
+    "description": "Raviolis rellenos de queso y jamón, bañados en cremosa salsa carbonara con panceta",
+    "price": 10,
+    "category": "Pasta",
+    "imageUrl": "https://www.pamperedchef.com/iceberg/com/recipe/32017-lg.jpg",
     "available": "true"
 }
 ###
@@ -51,3 +51,22 @@ Authorization: Bearer {{token}}
 DELETE {{domain}}/products/687781b7586c7edcea7f69fb
 Content-Type: application/json
 Authorization: Bearer {{token}}
+
+###
+POST {{domain}}/orders
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "products": [
+    {
+      "id": "687b7429533a4ac2d9d16ba7",
+      "quantity": 1
+    },
+    {
+      "id": "687933da35a046219dc51903",
+      "quantity": 1
+    }
+  ],
+  "deliveryAddress": "Calle Falsa 123, Springfield"
+}
