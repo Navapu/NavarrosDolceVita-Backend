@@ -101,7 +101,6 @@ export const delProduct = async (req, res, next) => {
         const { id } = req.params;
         const userRole = req.userRole;
         const product = await Product.findByIdAndDelete(id);
-        console.log(userRole);
         if (userRole !== "admin") {
             return res.status(403).json(ResponseAPI({
                 msg: "Forbidden: admin access required",

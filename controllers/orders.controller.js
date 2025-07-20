@@ -120,3 +120,29 @@ export const getUserAllOrders = async (req, res, next) => {
         next(error)
     }
 }
+
+export const getAllOrders = async (req, res, next) => {
+    const userRole = req.userRole;
+
+    if (userRole !== "admin") {
+        return res.status(403).json(ResponseAPI({
+            msg: "Forbidden: admin access required",
+            error: true
+        }));
+    }
+    const orders = await Order.find();
+
+    if(!orders){
+        return res.status(404).json(ResponseAPI({
+            msg: "There are no orders",
+            error: true
+        }));
+    }
+
+    return res.status(200).json(ResponseAPI({
+        msg: "All the orders",
+        data: orders,
+        error: false
+    }))
+    
+}
