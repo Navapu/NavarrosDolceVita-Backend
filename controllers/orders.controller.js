@@ -92,3 +92,31 @@ export const getOrder = async (req, res, next) => {
         next(error)
     }
 }
+
+export const getUserAllOrders = async (req, res, next) => {
+    try {
+        const userId = req.userId;
+        const currentUser = await User.findById(userId).select('-password');
+        if (!currentUser) {
+            return res.status(401).json(ResponseAPI({
+                msg: "User not found",
+                error: true
+            }));
+        }
+        const allOrders = await Order.find({ user: currentUser._id })
+
+        if (!allOrders) {
+            return res.status(404).json(ResponseAPI({
+                msg: "No orders found for this user",
+                error: true,
+            }));
+        }
+        return res.status(200).json(ResponseAPI({
+            msg: `${currentUser.name} orders: `,
+            data: allOrders,
+            error: false
+        }));
+    } catch (error) {
+        next(error)
+    }
+}

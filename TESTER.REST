@@ -75,3 +75,8 @@ Authorization: Bearer {{token}}
 GET {{domain}}/orders/687b7ad0f7bed69eaa66afff
 Content-Type: application/json
 Authorization: Bearer {{token}}
+
+###
+GET {{domain}}/orders
+Content-Type: application/json
+Authorization: Bearer {{token}}
