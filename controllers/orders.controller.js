@@ -122,27 +122,60 @@ export const getUserAllOrders = async (req, res, next) => {
 }
 
 export const getAllOrders = async (req, res, next) => {
-    const userRole = req.userRole;
+    try {
+        const userRole = req.userRole;
 
-    if (userRole !== "admin") {
-        return res.status(403).json(ResponseAPI({
-            msg: "Forbidden: admin access required",
-            error: true
-        }));
+        if (userRole !== "admin") {
+            return res.status(403).json(ResponseAPI({
+                msg: "Forbidden: admin access required",
+                error: true
+            }));
+        }
+        const orders = await Order.find();
+
+        if (orders.length === 0) {
+            return res.status(404).json(ResponseAPI({
+                msg: "There are no orders",
+                error: true
+            }));
+        }
+
+        return res.status(200).json(ResponseAPI({
+            msg: "All the orders",
+            data: orders,
+            error: false
+        }))
+
+    } catch (error) {
+        next(error)
     }
-    const orders = await Order.find();
+}
 
-    if(!orders){
-        return res.status(404).json(ResponseAPI({
-            msg: "There are no orders",
-            error: true
-        }));
+export const getPendingOrders = async (req, res, next) => {
+    try {
+        const userRole = req.userRole;
+
+        if (userRole !== "admin") {
+            return res.status(403).json(ResponseAPI({
+                msg: "Forbidden: admin access required",
+                error: true
+            }));
+        }
+
+        const orders = await Order.find({ status: "pending" });
+
+        if (orders.length === 0) {
+            return res.status(404).json(ResponseAPI({
+                msg: "There are no pending orders",
+                error: true
+            }));
+        }
+        return res.status(200).json(ResponseAPI({
+            msg: "Pending orders",
+            data: orders,
+            error: false
+        }))
+    } catch (error) {
+        next(error)
     }
-
-    return res.status(200).json(ResponseAPI({
-        msg: "All the orders",
-        data: orders,
-        error: false
-    }))
-    
 }

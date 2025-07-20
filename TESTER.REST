@@ -85,3 +85,8 @@ Authorization: Bearer {{token}}
 GET {{domain}}/orders
 Content-Type: application/json
 Authorization: Bearer {{token}}
+
+###
+GET {{domain}}/orders/pending
+Content-Type: application/json
+Authorization: Bearer {{token}}
