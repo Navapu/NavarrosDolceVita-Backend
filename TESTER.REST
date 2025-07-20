@@ -1,5 +1,5 @@
 @domain = http://localhost:3001
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODc1ODEzZDk1YTcwODBjM2M0NWRjZGYiLCJuYW1lIjoiQWxlamFuZHJvIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzUyOTE5OTUzLCJleHAiOjE3NTI5MjcxNTN9.t7OKe2msq9PTmXGYFW9442Ab7j5rR6JvHPWn-49Bry4
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODc1ODEzZDk1YTcwODBjM2M0NWRjZGYiLCJuYW1lIjoiQWxlamFuZHJvIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzUyOTY5ODcyLCJleHAiOjE3NTI5NzcwNzJ9.x6Oefbpv2L7uOW-QG4_vYGPFOQStj9Ixdak-BRKJ8K8
 
 
 ###
@@ -70,3 +70,8 @@ Authorization: Bearer {{token}}
   ],
   "deliveryAddress": "Calle Falsa 123, Springfield"
 }
+
+###
+GET {{domain}}/orders/687b7ad0f7bed69eaa66afff
+Content-Type: application/json
+Authorization: Bearer {{token}}
