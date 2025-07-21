@@ -74,8 +74,6 @@ export const getOrder = async (req, res, next) => {
         }
 
         if (currentUser._id.toString() !== existingOrder.user.toString()) {
-            console.log(currentUser._id);
-            console.log(existingOrder.user)
             return res.status(403).json(ResponseAPI({
                 msg: "Forbidden: You are not authorized to view this order",
                 error: true
@@ -175,6 +173,45 @@ export const getPendingOrders = async (req, res, next) => {
             data: orders,
             error: false
         }))
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const statusOrders = async (req, res, next) => {
+    try {
+        const userRole = req.userRole;
+        const { id } = req.params;
+        const { status } = req.body;
+        if (userRole !== "admin") {
+            return res.status(403).json(ResponseAPI({
+                msg: "Forbidden: admin access required",
+                error: true
+            }));
+        }
+
+        const existingOrder = await Order.findByIdAndUpdate(
+            id,
+            { status },
+            {
+                new: true,
+                runValidators: true
+            }
+        );
+
+        if (!existingOrder) {
+            return res.status(401).json(ResponseAPI({
+                msg: "Order not found",
+                error: true
+            }));
+        }
+        
+        return res.status(200).json(ResponseAPI({
+            msg: `Updated order to ${status}`,
+            data: existingOrder,
+            error: false
+        }));
+
     } catch (error) {
         next(error)
     }

@@ -1,5 +1,5 @@
 @domain = http://localhost:3001
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODc1ODEzZDk1YTcwODBjM2M0NWRjZGYiLCJuYW1lIjoiQWxlamFuZHJvIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzUyOTY5ODcyLCJleHAiOjE3NTI5NzcwNzJ9.x6Oefbpv2L7uOW-QG4_vYGPFOQStj9Ixdak-BRKJ8K8
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODc1ODEzZDk1YTcwODBjM2M0NWRjZGYiLCJuYW1lIjoiQWxlamFuZHJvIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzUzMTM2NjM0LCJleHAiOjE3NTMxNDM4MzR9.mwKts7uE-WA1ofUldCHE7v-r84BUCBnU_o7vMIhm_bw
 
 
 ###
@@ -90,3 +90,12 @@ Authorization: Bearer {{token}}
 GET {{domain}}/orders/pending
 Content-Type: application/json
 Authorization: Bearer {{token}}
+
+###
+PUT {{domain}}/orders/status/687b7ad0f7bed69eaa66afff
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "status": "delivered"
+}
