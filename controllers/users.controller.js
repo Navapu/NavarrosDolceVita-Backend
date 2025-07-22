@@ -35,7 +35,6 @@ export const loginUser = async (req, res, next) => {
                 expiresIn: '2h'
             }
         );
-
         return res.status(200).json(ResponseAPI({
             msg: 'Correct login',
             data: {

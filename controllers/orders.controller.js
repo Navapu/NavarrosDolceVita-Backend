@@ -28,6 +28,7 @@ export const createOrder = async (req, res, next) => {
                 product: existingProduct._id,
                 name: existingProduct.name,
                 price: existingProduct.price,
+                imageUrl: existingProduct.imageUrl,
                 quantity: product.quantity
             };
         }));

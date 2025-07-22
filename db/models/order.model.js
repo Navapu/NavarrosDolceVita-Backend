@@ -31,7 +31,8 @@ const orderSchema = new mongoose.Schema({
     price: {
       type: Number,
       required: true
-    }
+    },
+    imageUrl: String
   }],
   totalPrice: {
     type: Number,
@@ -39,8 +40,8 @@ const orderSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ["pending", "preparing", "delivered", "cancelled"],
-    default: "pending"
+    enum: ["Pendiente", "Preparando", "Entregado", "Cancelado"],
+    default: "Pendiente"
   },
   deliveryAddress: {
     type: String,

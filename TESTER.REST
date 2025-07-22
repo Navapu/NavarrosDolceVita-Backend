@@ -1,5 +1,5 @@
 @domain = http://localhost:3001
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODc1ODEzZDk1YTcwODBjM2M0NWRjZGYiLCJuYW1lIjoiQWxlamFuZHJvIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzUzMTM2NjM0LCJleHAiOjE3NTMxNDM4MzR9.mwKts7uE-WA1ofUldCHE7v-r84BUCBnU_o7vMIhm_bw
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODc1ODEzZDk1YTcwODBjM2M0NWRjZGYiLCJuYW1lIjoiQWxlamFuZHJvIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzUzMjIwNjA1LCJleHAiOjE3NTMyMjc4MDV9.9TKDbsCtiDrTpH82MEfb4KrbD56BNDHPB-K3jc8sR44
 
 
 ###
@@ -60,12 +60,15 @@ Authorization: Bearer {{token}}
 {
   "products": [
     {
-      "id": "687b7429533a4ac2d9d16ba7",
-      "quantity": 1
+      "id": "687933da35a046219dc51903",
+      "quantity": 1,
+      "imageUrl": "https://www.grupoestrellapolar.com/files/products/pizza_margarita1.png"
+
     },
     {
       "id": "687933da35a046219dc51903",
-      "quantity": 1
+      "quantity": 1,
+      "imageUrl": "https://www.grupoestrellapolar.com/files/products/pizza_margarita1.png"
     }
   ],
   "deliveryAddress": "Calle Falsa 123, Springfield"
@@ -97,5 +100,5 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "status": "delivered"
+  "status": "Entregado"
 }
