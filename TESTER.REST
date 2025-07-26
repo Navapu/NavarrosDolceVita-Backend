@@ -1,5 +1,5 @@
 @domain = http://localhost:3001
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODc1ODEzZDk1YTcwODBjM2M0NWRjZGYiLCJuYW1lIjoiQWxlamFuZHJvIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzUzMjIwNjA1LCJleHAiOjE3NTMyMjc4MDV9.9TKDbsCtiDrTpH82MEfb4KrbD56BNDHPB-K3jc8sR44
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODc1ODEzZDk1YTcwODBjM2M0NWRjZGYiLCJuYW1lIjoiQWxlamFuZHJvIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzUzNTQ5Njg5LCJleHAiOjE3NTM1NTY4ODl9.GXql2xCVbiQTPWHq-GaIJsGt5r_movKWdvQUP_wmRLU
 
 
 ###
@@ -71,7 +71,8 @@ Authorization: Bearer {{token}}
       "imageUrl": "https://www.grupoestrellapolar.com/files/products/pizza_margarita1.png"
     }
   ],
-  "deliveryAddress": "Calle Falsa 123, Springfield"
+  "deliveryAddress": "Calle Falsa 123, Springfield",
+  "selectedPayment": "Tarjeta"
 }
 
 ###

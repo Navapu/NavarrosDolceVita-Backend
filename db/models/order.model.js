@@ -46,6 +46,10 @@ const orderSchema = new mongoose.Schema({
   deliveryAddress: {
     type: String,
     required: true
+  },
+  selectedPayment: {
+    type: String,
+    required: true
   }
 }, { timestamps: true }, options);
 

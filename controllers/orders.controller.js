@@ -2,7 +2,7 @@ import { Order, Product, User } from "../db/models/index.js"
 import { ResponseAPI } from "../utils/response.js"
 export const createOrder = async (req, res, next) => {
     try {
-        const { products, deliveryAddress } = req.body;
+        const { products, deliveryAddress, selectedPayment } = req.body;
         const userId = req.userId;
         let total = 0;
         let notexist = false;
@@ -42,7 +42,8 @@ export const createOrder = async (req, res, next) => {
             user: userId,
             products: detailedProducts,
             totalPrice: total,
-            deliveryAddress
+            deliveryAddress,
+            selectedPayment
         });
         res.status(201).json(ResponseAPI({
             msg: "Order created",
@@ -130,7 +131,7 @@ export const getAllOrders = async (req, res, next) => {
                 error: true
             }));
         }
-        const orders = await Order.find();
+        const orders = await Order.find().populate("user");
 
         if (orders.length === 0) {
             return res.status(404).json(ResponseAPI({
@@ -138,7 +139,6 @@ export const getAllOrders = async (req, res, next) => {
                 error: true
             }));
         }
-
         return res.status(200).json(ResponseAPI({
             msg: "All the orders",
             data: orders,
@@ -206,7 +206,7 @@ export const statusOrders = async (req, res, next) => {
                 error: true
             }));
         }
-        
+
         return res.status(200).json(ResponseAPI({
             msg: `Updated order to ${status}`,
             data: existingOrder,
