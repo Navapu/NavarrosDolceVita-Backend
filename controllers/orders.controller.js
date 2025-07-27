@@ -131,7 +131,17 @@ export const getAllOrders = async (req, res, next) => {
                 error: true
             }));
         }
-        const orders = await Order.find().populate("user");
+        const { status } = req.query;
+        let filter = {};
+
+        if (status) {
+            if (status === "Pendiente") {
+                filter.status = { $in: ["Pendiente", "Preparando"] };
+            } else {
+                filter.status = status;
+            }
+        }
+        const orders = await Order.find(filter).populate("user").sort({ createdAt: -1 });
 
         if (orders.length === 0) {
             return res.status(404).json(ResponseAPI({
